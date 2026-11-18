@@ -1,11 +1,16 @@
 {
   "expo": {
     "name": "BhojanSeva",
-    "slug": "BhojanSeva",
+    "slug": "bhojanseva",
+    "scheme": "bhojanseva",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
     "userInterfaceStyle": "light",
+    "plugins": [
+      "expo-router",
+      "expo-secure-store"
+    ],
     "ios": {
       "supportsTablet": true
     },
