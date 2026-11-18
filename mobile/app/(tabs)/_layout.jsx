@@ -1,10 +1,12 @@
 import React from 'react';
 import { Tabs } from 'expo-router';
-import { Home, Utensils, ClipboardList, Bell, User } from 'lucide-react-native';
+import { Home, Utensils, ClipboardList, Bell, User, BarChart2 } from 'lucide-react-native';
 import { COLORS } from '../../constants/theme';
+import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { useAuth } from '../../context/AuthContext';
 
 export default function TabLayout() {
+  const insets = useSafeAreaInsets();
   const { user } = useAuth();
 
   const getDonationsTitle = () => {
@@ -30,8 +32,8 @@ export default function TabLayout() {
           backgroundColor: COLORS.surface,
           borderTopColor: COLORS.borderLight,
           borderTopWidth: 1,
-          height: 60,
-          paddingBottom: 8,
+          height: 60 + insets.bottom,
+          paddingBottom: insets.bottom + 8,
           paddingTop: 6,
         },
         tabBarLabelStyle: {
@@ -75,6 +77,20 @@ export default function TabLayout() {
           tabBarIcon: ({ color, size }) => <User size={size || 22} color={color} />,
         }}
       />
+      <Tabs.Screen
+        name="impact"
+        options={{
+          title: 'Impact',
+          tabBarIcon: ({ color, size }) => <BarChart2 size={size || 22} color={color} />,
+        }}
+      />
+      <Tabs.Screen name="donor-impact" options={{ href: null }} />
+      <Tabs.Screen name="ngo-impact" options={{ href: null }} />
+      <Tabs.Screen name="home" options={{ href: null }} />
+      <Tabs.Screen name="discover" options={{ href: null }} />
+      <Tabs.Screen name="collections" options={{ href: null }} />
+      <Tabs.Screen name="donor-dashboard" options={{ href: null }} />
+      <Tabs.Screen name="ngo-dashboard" options={{ href: null }} />
     </Tabs>
   );
 }

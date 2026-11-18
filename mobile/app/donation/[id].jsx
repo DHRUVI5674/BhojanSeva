@@ -3,7 +3,6 @@ import {
   View,
   Text,
   StyleSheet,
-  SafeAreaView,
   ScrollView,
   Image,
   TouchableOpacity,
@@ -11,6 +10,7 @@ import {
   Alert,
   Modal,
 } from 'react-native';
+import { SafeAreaView } from 'react-native-safe-area-context';
 import { useLocalSearchParams, useRouter } from 'expo-router';
 import {
   Utensils,
@@ -276,12 +276,20 @@ export default function DonationDetailsScreen() {
             )}
 
             {isOwner && donation.status === 'AVAILABLE' && (
-              <Button
-                title="Cancel Food Donation"
-                variant="danger"
-                size="md"
-                onPress={handleCancelDonation}
-              />
+              <View style={{ gap: SPACING.sm, width: '100%' }}>
+                <Button
+                  title="Edit Food Donation"
+                  variant="outline"
+                  size="md"
+                  onPress={() => router.push({ pathname: '/donation/edit', params: { id } })}
+                />
+                <Button
+                  title="Cancel Food Donation"
+                  variant="danger"
+                  size="md"
+                  onPress={handleCancelDonation}
+                />
+              </View>
             )}
           </View>
         </View>

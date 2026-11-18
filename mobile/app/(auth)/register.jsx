@@ -3,10 +3,10 @@ import {
   View,
   Text,
   StyleSheet,
-  SafeAreaView,
   ScrollView,
   TouchableOpacity,
 } from 'react-native';
+import { SafeAreaView } from 'react-native-safe-area-context';
 import { useRouter } from 'expo-router';
 import {
   User,
@@ -67,12 +67,12 @@ export default function RegisterScreen() {
         password,
         phone: phone.trim(),
         role,
-        organizationName: organizationName.trim(),
-        address: address.trim(),
+        organizationName: ['donor', 'recipient'].includes(role) ? organizationName.trim() : undefined,
+        address: address.trim() || undefined,
       });
       router.replace('/(tabs)');
     } catch (err) {
-      setError(err.message || 'Registration failed');
+      setError(err.message || 'Registration failed. Please try again.');
     } finally {
       setLoading(false);
     }
@@ -143,7 +143,7 @@ export default function RegisterScreen() {
           </View>
         ) : null}
 
-        {/* Registration Form */}
+        {/* Inputs */}
         <View style={styles.form}>
           <Input
             label="Full Name *"
@@ -155,7 +155,7 @@ export default function RegisterScreen() {
 
           <Input
             label="Email Address *"
-            placeholder="john@example.com"
+            placeholder="you@example.com"
             value={email}
             onChangeText={setEmail}
             icon={Mail}
@@ -171,10 +171,10 @@ export default function RegisterScreen() {
             keyboardType="phone-pad"
           />
 
-          {(role === 'donor' || role === 'recipient') && (
+          {['donor', 'recipient'].includes(role) && (
             <Input
-              label={role === 'donor' ? 'Restaurant / Business Name' : 'NGO / Shelter Name'}
-              placeholder="e.g. Anand Food Relief Foundation"
+              label={role === 'donor' ? 'Organization / Restaurant Name' : 'NGO / Shelter Name'}
+              placeholder="e.g. Radhe Caterers or Helping Hands NGO"
               value={organizationName}
               onChangeText={setOrganizationName}
               icon={Building}
@@ -182,8 +182,8 @@ export default function RegisterScreen() {
           )}
 
           <Input
-            label="Address / Area"
-            placeholder="Street address, city"
+            label="Physical Address"
+            placeholder="City, Area, Landmark"
             value={address}
             onChangeText={setAddress}
             icon={MapPin}
@@ -200,7 +200,7 @@ export default function RegisterScreen() {
 
           <Input
             label="Confirm Password *"
-            placeholder="Re-enter your password"
+            placeholder="Re-type password"
             value={confirmPassword}
             onChangeText={setConfirmPassword}
             icon={Lock}
@@ -214,7 +214,7 @@ export default function RegisterScreen() {
             size="lg"
             loading={loading}
             onPress={handleRegister}
-            style={{ marginTop: SPACING.sm }}
+            style={{ marginTop: SPACING.md }}
           />
         </View>
 
@@ -241,7 +241,7 @@ const styles = StyleSheet.create({
   backButton: {
     alignSelf: 'flex-start',
     padding: SPACING.xs,
-    marginBottom: SPACING.sm,
+    marginBottom: SPACING.md,
   },
   header: {
     marginBottom: SPACING.md,
@@ -260,13 +260,13 @@ const styles = StyleSheet.create({
     fontSize: 11,
     fontWeight: '700',
     color: COLORS.textSecondary,
-    marginBottom: SPACING.xs,
+    marginBottom: SPACING.sm,
     letterSpacing: 0.5,
   },
   roleTabs: {
     flexDirection: 'row',
     marginBottom: SPACING.md,
-    backgroundColor: '#E2E8F0',
+    backgroundColor: '#F3F4F6',
     borderRadius: RADIUS.md,
     padding: 4,
   },

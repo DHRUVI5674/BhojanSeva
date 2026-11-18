@@ -3,7 +3,6 @@ import {
   View,
   Text,
   StyleSheet,
-  SafeAreaView,
   ScrollView,
   FlatList,
   RefreshControl,
@@ -11,6 +10,7 @@ import {
   ActivityIndicator,
   TextInput,
 } from 'react-native';
+import { SafeAreaView } from 'react-native-safe-area-context';
 import { useRouter } from 'expo-router';
 import { Search, Filter, Plus, Check } from 'lucide-react-native';
 import { useAuth } from '../../context/AuthContext';

@@ -1,7 +1,8 @@
 import React from 'react';
-import { View, Text, StyleSheet, SafeAreaView, ScrollView } from 'react-native';
+import { View, Text, StyleSheet, ScrollView, Image } from 'react-native';
+import { SafeAreaView } from 'react-native-safe-area-context';
 import { useRouter } from 'expo-router';
-import { UtensilsCrossed, HeartHandshake, Truck, ShieldCheck } from 'lucide-react-native';
+import { HeartHandshake, Truck, ShieldCheck, Sparkles } from 'lucide-react-native';
 import { COLORS, SPACING, RADIUS, SHADOWS } from '../../constants/theme';
 import { APP_INFO } from '../../constants/config';
 import Button from '../../components/Button';
@@ -11,11 +12,15 @@ export default function WelcomeScreen() {
 
   return (
     <SafeAreaView style={styles.safeArea}>
-      <ScrollView contentContainerStyle={styles.container}>
+      <ScrollView contentContainerStyle={styles.container} showsVerticalScrollIndicator={false}>
         {/* Top Hero Logo */}
         <View style={styles.heroSection}>
-          <View style={styles.logoCircle}>
-            <UtensilsCrossed size={52} color={COLORS.surface} />
+          <View style={styles.logoWrapper}>
+            <Image
+              source={require('../../assets/bhojanseva-logo.png')}
+              style={styles.logoImage}
+              resizeMode="cover"
+            />
           </View>
           <Text style={styles.title}>{APP_INFO.name}</Text>
           <Text style={styles.tagline}>{APP_INFO.tagline}</Text>
@@ -88,47 +93,52 @@ const styles = StyleSheet.create({
   },
   container: {
     paddingHorizontal: SPACING.lg,
-    paddingVertical: SPACING.xl,
+    paddingVertical: SPACING.lg,
     justifyContent: 'space-between',
     minHeight: '100%',
   },
   heroSection: {
     alignItems: 'center',
-    marginVertical: SPACING.lg,
+    marginVertical: SPACING.sm,
   },
-  logoCircle: {
-    width: 90,
-    height: 90,
-    borderRadius: 45,
-    backgroundColor: COLORS.primary,
-    alignItems: 'center',
-    justifyContent: 'center',
-    marginBottom: SPACING.md,
+  logoWrapper: {
+    width: 140,
+    height: 140,
+    borderRadius: 24,
+    overflow: 'hidden',
+    backgroundColor: '#0F3E22',
+    borderWidth: 2,
+    borderColor: '#22C55E',
     ...SHADOWS.md,
+    marginBottom: SPACING.md,
+  },
+  logoImage: {
+    width: '100%',
+    height: '100%',
   },
   title: {
-    fontSize: 32,
-    fontWeight: '800',
-    color: COLORS.primary,
-    letterSpacing: 0.5,
+    fontSize: 28,
+    fontWeight: '900',
+    color: '#0F3E22',
+    letterSpacing: -0.5,
   },
   tagline: {
-    fontSize: 14,
-    color: COLORS.textSecondary,
-    fontWeight: '500',
+    fontSize: 15,
+    fontWeight: '600',
+    color: COLORS.primary,
     marginTop: 4,
     textAlign: 'center',
   },
   featuresSection: {
-    marginVertical: SPACING.lg,
+    marginVertical: SPACING.md,
+    gap: SPACING.md,
   },
   featureItem: {
     flexDirection: 'row',
     alignItems: 'center',
     backgroundColor: COLORS.surface,
     padding: SPACING.md,
-    borderRadius: RADIUS.md,
-    marginBottom: SPACING.sm + 4,
+    borderRadius: RADIUS.lg,
     ...SHADOWS.sm,
     borderWidth: 1,
     borderColor: COLORS.borderLight,
@@ -136,7 +146,7 @@ const styles = StyleSheet.create({
   featureIcon: {
     width: 48,
     height: 48,
-    borderRadius: RADIUS.sm,
+    borderRadius: RADIUS.md,
     alignItems: 'center',
     justifyContent: 'center',
     marginRight: SPACING.md,
@@ -148,12 +158,12 @@ const styles = StyleSheet.create({
     fontSize: 15,
     fontWeight: '700',
     color: COLORS.textPrimary,
+    marginBottom: 2,
   },
   featureSubtitle: {
     fontSize: 12,
     color: COLORS.textSecondary,
-    marginTop: 2,
-    lineHeight: 16,
+    lineHeight: 17,
   },
   actionsSection: {
     marginTop: SPACING.md,

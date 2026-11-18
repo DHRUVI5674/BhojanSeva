@@ -60,6 +60,8 @@ app.get('/api/health', (req, res) => {
 });
 
 // Mount Routes
+const impactRoutes = require('./routes/impact');
+app.use('/api/ngo/impact', impactRoutes);
 app.use('/api/auth', authRoutes);
 app.use('/api/donations', donationRoutes);
 app.use('/api/requests', requestRoutes);

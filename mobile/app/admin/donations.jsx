@@ -3,12 +3,12 @@ import {
   View,
   Text,
   StyleSheet,
-  SafeAreaView,
   FlatList,
   RefreshControl,
   TouchableOpacity,
   ActivityIndicator,
 } from 'react-native';
+import { SafeAreaView } from 'react-native-safe-area-context';
 import { adminService } from '../../services/adminService';
 import { COLORS, SPACING, RADIUS } from '../../constants/theme';
 import DonationCard from '../../components/DonationCard';

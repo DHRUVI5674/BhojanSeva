@@ -6,6 +6,7 @@ const { connectDB, closeDB } = require('./config/db');
 const PORT = process.env.PORT || 5000;
 
 // Connect to MongoDB and start HTTP Server
+let server; // will hold the HTTP server instance
 const startServer = async () => {
   await connectDB();
 

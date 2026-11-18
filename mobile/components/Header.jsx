@@ -1,7 +1,11 @@
 import React from 'react';
 import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
 import { useRouter } from 'expo-router';
+import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { ArrowLeft, Bell } from 'lucide-react-native';
+
+
+
 import { COLORS, SPACING, RADIUS, SHADOWS } from '../constants/theme';
 import { useAuth } from '../context/AuthContext';
 
@@ -13,6 +17,7 @@ export default function Header({
   unreadCount = 0,
   rightAction,
 }) {
+  const insets = useSafeAreaInsets();
   const router = useRouter();
   const { user } = useAuth();
 
@@ -34,7 +39,8 @@ export default function Header({
   const badge = user ? getRoleBadge(user.role) : null;
 
   return (
-    <View style={styles.container}>
+    <View style={[styles.container, { paddingTop: insets.top + SPACING.sm }]}>
+
       <View style={styles.leftContainer}>
         {showBack ? (
           <TouchableOpacity
