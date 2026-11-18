@@ -85,8 +85,6 @@ Configure `.env` (a template is provided in `.env.example`):
 ```env
 PORT=5000
 NODE_ENV=development
-MONGO_URI=mongodb://127.0.0.1:27017/bhojanseva
-JWT_SECRET=bhojanseva_super_secret_jwt_key_2026_dev_prod_secure
 JWT_EXPIRE=30d
 CLIENT_URL=*
 ```
